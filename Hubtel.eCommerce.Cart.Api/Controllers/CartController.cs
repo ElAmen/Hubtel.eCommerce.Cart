@@ -34,10 +34,10 @@ namespace Hubtel.eCommerce.Cart.Api.Controllers
             if (item?.ItemId <= 0)
                 ModelState.AddModelError("", "Invalid item ID.");
 
-            if (!string.IsNullOrWhiteSpace(item?.ItemName))
+            if (string.IsNullOrWhiteSpace(item?.ItemName))
                 ModelState.AddModelError("", "Invalid item name.");
 
-            if (!string.IsNullOrWhiteSpace(item?.PhoneNumber))
+            if (string.IsNullOrWhiteSpace(item?.PhoneNumber))
                 ModelState.AddModelError("", "Invalid customer phone number provided.");
 
             if (item?.Quantity <= 0)
@@ -63,7 +63,7 @@ namespace Hubtel.eCommerce.Cart.Api.Controllers
 
                     _context.SaveChanges();
 
-                    return Ok();
+                    return Ok(item);
                 }
             }
             catch (Exception e)
